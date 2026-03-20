@@ -1,0 +1,23 @@
+/* Implementation des classes pour les cases selectioné */
+
+.orange{
+  background-color: orange;
+}
+.blue{
+  background-color: blue;
+}
+.green{
+  background-color: green;
+}
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+}
+
+.board{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
