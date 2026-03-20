@@ -16,8 +16,20 @@ function App() {
     const resetY = useScore((state) => state.resetScoreY)
 
   function changeColor(){
+    // Fonction qui change la couleur de la constante globale
     setColor(colorsTab[Math.floor(Math.random() * colorsTab.length)])
 
+  }
+
+  function checkCombination(i,j){
+    // Fonction qui vérifie les différentes combinaisons afin de vérifier s'il y a un une combinaison
+    let cpt = 0
+    for(let val = 0;val<board.length;val++) //Vérification ligne
+      if(board[val][j]===board[i][j])
+        cpt++
+      else
+        if(cpt<3)
+          cpt=0
   }
   
   function handleClick(e,i,j){
