@@ -7,7 +7,7 @@ function App() {
   const [board,setBoard] = useState(Array(5).fill().map(row => new Array(5).fill("")))
   const [isDisable,setIsDisable]=useState(false)
   const couleurs = ["red","blue","yellow","green","orange"]
-  const [colors, setColor] = useState("white")
+  const [colors, setColor] = useState(couleurs[Math.floor(Math.random() * couleurs.length)])
   // Constante des scores
     const scoreX = useScore((state) => state.scoreX)
     const scoreY = useScore((state) => state.scoreY)
@@ -16,18 +16,16 @@ function App() {
     const resetX = useScore((state) => state.resetScoreX)
     const resetY = useScore((state) => state.resetScoreY)
 
-  function changeColor(i,j){
-    const newBoard = [...board]
+  function changeColor(){
     setColor(couleurs[Math.floor(Math.random() * couleurs.length)])
-    console.log(newBoard[i][j])
-    setBoard(newBoard)
+
   }
   
   function handleClick(e,i,j){
     e.target.className=colors
+    e.target.disabled=true
     console.log("Click",i,j)
-    
-    changeColor(i,j)
+    changeColor()
   }
 
   return (
@@ -40,6 +38,7 @@ function App() {
           {board[i][j]}
           </button>
         )))}
+        <p>Vous jouer la couleur : {colors}</p>
       </div>
     </>
   )
