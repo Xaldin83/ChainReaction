@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [board,setBoard] = useState(Array(5).fill(Array(5).fill("")))
+  const [board,setBoard] = useState(Array(5).fill().map(row => new Array(5).fill("")))
   const [isDisable,setIsDisable]=useState(false)
   const couleurs = ["red","blue","yellow","green","orange"]
 
