@@ -11,6 +11,7 @@ function App() {
   function changeColor(i,j){
     const newBoard = [...board]
     newBoard[i][j]="Click"
+    newBoard[i][j].toggle(couleurs[Math.floor(Math.random() * couleurs.length)])
     console.log(newBoard[i][j])
     setBoard(newBoard)
   }
