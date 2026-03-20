@@ -24,7 +24,13 @@ function App() {
   function handleClick(e,i,j){
     e.target.className=colors
     e.target.disabled=true
+    const newBoard=[...board]
+
+    newBoard[i][j]=colors
+
+    setBoard(newBoard)
     console.log("Click",i,j)
+    console.log(newBoard)
     changeColor()
   }
 
@@ -35,7 +41,7 @@ function App() {
       <div className="board">
         {board.map((cell,i)=>(cell.map((cell2,j)=>
           <button disabled={isDisable} name="pad" key={j} className={`cell`} onClick={(e)=>handleClick(e,i,j)}>
-          {board[i][j]}
+          
           </button>
         )))}
         <p>Vous jouer la couleur : {colors}</p>

@@ -22,5 +22,8 @@
   grid-template-rows: repeat(5, 1fr);
   button{
     height: 80px;
+    span{
+      color: rgb(255, 255, 255);
+    }
   }
 }
