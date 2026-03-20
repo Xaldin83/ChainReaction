@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { useScore } from './store/storeScore'
 
 function App() {
 
@@ -7,6 +8,13 @@ function App() {
   const [isDisable,setIsDisable]=useState(false)
   const couleurs = ["red","blue","yellow","green","orange"]
 
+  // Constante des scores
+    const scoreX = useScore((state) => state.scoreX)
+    const scoreY = useScore((state) => state.scoreY)
+    const increaseScoreX = useScore((state) => state.increaseScoreX)
+    const increaseScoreY = useScore((state) => state.increaseScoreY)
+    const resetX = useScore((state) => state.resetScoreX)
+    const resetY = useScore((state) => state.resetScoreY)
 
   function changeColor(i,j){
     const newBoard = [...board]
