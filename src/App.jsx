@@ -8,6 +8,7 @@ function App() {
   const colorsTab = ["red","blue","yellow","green","orange"]
   const [color, setColor] = useState(colorsTab[Math.floor(Math.random() * colorsTab.length)])
   const [isX, setIsX]=useState(true)
+
   // Constante des scores
     const scoreX = useScore((state) => state.scoreX)
     const scoreY = useScore((state) => state.scoreY)
@@ -25,6 +26,7 @@ function App() {
   function checkCombination(i,j){
     // Fonction qui vérifie les différentes combinaisons afin de vérifier s'il y a un une combinaison
     let cpt = 0
+    let subCase = true
     for(let val = 0;val<board.length;val++){ //Vérification ligne
       if(board[val][j]===board[i][j])
         cpt++
@@ -33,12 +35,13 @@ function App() {
           cpt=0}
     if(cpt!=0){
       for(let k =0;k<cpt-2;k++){
-        if(isX)
-            increaseScoreX()
+        if(isX){
+          increaseScoreX()
+          subCase = false}
         else
           increaseScoreY()}
     }
-    console.log(cpt)
+
     cpt=0
     for(let val = 0;val<board.length;val++){ //Vérification ligne
       if(board[i][val]===board[i][j])
@@ -47,13 +50,17 @@ function App() {
         if(cpt<3)
           cpt=0}
     if(cpt!=0){
+      subCase = false
       for(let k =0;k<cpt-2;k++){
         if(isX)
           increaseScoreX()
         else
           increaseScoreY()}
     }
-    console.log(cpt)
+
+    if (!subCase) {
+      board[i][j] = " "
+    }
   }
   
   function handleClick(e,i,j){
