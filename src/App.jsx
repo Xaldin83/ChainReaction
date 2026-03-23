@@ -172,6 +172,7 @@ function App() {
       </div>
         <p>{isX ? <span>Joueur 1</span> : <span>{isBot?"Ordinateur":"Joueur 2"}</span>} tire la couleur : {color}</p>
         <button className='game-mode' onClick={()=> passTurn()}>Passer le tour</button>
+
     </>
   )
 }
