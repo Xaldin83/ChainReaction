@@ -159,8 +159,10 @@ function App() {
       <h1>Chain Reaction</h1>
 
       <p>Score Joueur 1 : {scoreX}<br/>Score {isBot?"Ordinateur":"Joueur 2"} : {scoreY}</p>
-      <button onClick={()=>reset()}>Reset</button>
-      <button onClick={()=>playerBot()}>{isBot?"Contre un joueur":"Contre un bot"}</button>
+      <div className='btn-div'>
+        <button className='game-mode' onClick={()=>reset()}>Reset</button>
+        <button className='game-mode' onClick={()=>playerBot()}>{isBot?"Contre un joueur":"Contre un bot"}</button>
+      </div>
       <div className="board">
         {board.map((cell,i)=>(cell.map((cell2,j)=>
           <button disabled={board[i][j] ? true : false} name="pad" key={j} className={`cell ${board[i][j]}`} onClick={(e)=>handleClick(e,i,j)}>
@@ -169,7 +171,7 @@ function App() {
         )))}
       </div>
         <p>{isX ? <span>Joueur 1</span> : <span>{isBot?"Ordinateur":"Joueur 2"}</span>} tire la couleur : {color}</p>
-        <button onClick={()=> passTurn()}>Passer le tour</button>
+        <button className='game-mode' onClick={()=> passTurn()}>Passer le tour</button>
     </>
   )
 }
