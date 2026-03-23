@@ -8,6 +8,7 @@ function App() {
   const colorsTab = ["red","blue","yellow","green","orange"]
   const [color, setColor] = useState(colorsTab[Math.floor(Math.random() * colorsTab.length)])
   const [isX, setIsX]=useState(true)
+  const [cptShoot, setCptShoot] = useState(2)
 
   // Constante des scores
     const scoreX = useScore((state) => state.scoreX)
@@ -20,7 +21,6 @@ function App() {
   function changeColor(){
     // Fonction qui change la couleur de la constante globale
     setColor(colorsTab[Math.floor(Math.random() * colorsTab.length)])
-
   }
 
   function checkCombination(i,j){
@@ -43,13 +43,11 @@ function App() {
         else
           increaseScoreY()}
       let k = i-1
-      while(k>=0 && board[k][j]===board[i][j]){
-        console.log(k,j)
+      while(k >= 0 && board[k][j]===board[i][j]){
         board[k][j]= null
         k--}
       k = i+1
-      while(k<5 && board[k][j]===board[i][j]){
-        console.log(k,j)
+      while(k < 5 && board[k][j]===board[i][j]){
         board[k][j]= null
         k++}
     }
@@ -69,6 +67,7 @@ function App() {
       for(let x =0;x<cpt-2;x++){
         if(isX)
           increaseScoreX()
+          
         else
           increaseScoreY()}
       let k = j-1
@@ -85,15 +84,26 @@ function App() {
 
     if (!subCase) {
       board[i][j] = null
+      setCptShoot(cptShoot + 1)
+      console.log("couille", cptShoot)
     }
   }
   
   function handleClick(e,i,j){
-    const newBoard=[...board]
-    newBoard[i][j]=color
-    setBoard(newBoard)
-    changeColor()
-    checkCombination(i,j)
+    if (cptShoot != 0) {  // On verifie qui joue en fonction du compteur de tour, chaque joueur a droit à 2 tir par tour
+      const newBoard=[...board]
+      newBoard[i][j]=color
+      setBoard(newBoard)
+      changeColor()
+      checkCombination(i,j)
+      setCptShoot(cptShoot-1)
+      console.log("bapt", cptShoot)
+    } 
+  }
+  if (cptShoot === 0 ) {
+    setIsX(!isX)
+    setCptShoot(2)
+    console.log("cosmique", cptShoot)
   }
 
   return (
@@ -107,7 +117,7 @@ function App() {
           
           </button>
         )))}
-        <p>Vous jouer la couleur : {color}</p>
+        <p>{isX ? <span>Joueur 1</span> : <span>Joueur 2</span>} joue la couleur : {color}</p>
       </div>
     </>
   )
