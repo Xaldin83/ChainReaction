@@ -4,7 +4,7 @@ import { useScore } from './store/storeScore'
 
 function App() {
 
-  const [board,setBoard] = useState(Array(5).fill().map(row => new Array(5).fill("")))
+  const [board,setBoard] = useState(() => Array(5).fill().map(() => new Array(5).fill("")))
   const colorsTab = ["red","blue","yellow","green","orange"]
   const [color, setColor] = useState(colorsTab[Math.floor(Math.random() * colorsTab.length)])
   const [isX, setIsX]=useState(true)
@@ -129,7 +129,7 @@ function App() {
       changeColor()
       let trueFalse = checkCombination(i,j)
       if (trueFalse) {
-        setCptShoot(cptShoot-1)
+        setCptShoot(cptShoot => cptShoot-1)
       }
     } 
   }
@@ -140,7 +140,7 @@ function App() {
       botTurn()}
   }
   function reset() {
-    setBoard(Array(5).fill().map(row => new Array(5).fill("")))
+    setBoard(() => Array(5).fill().map(row => new Array(5).fill("")))
     resetX()
     resetY()
     setCptShoot(2)
