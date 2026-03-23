@@ -9,6 +9,7 @@ function App() {
   const [color, setColor] = useState(colorsTab[Math.floor(Math.random() * colorsTab.length)])
   const [isX, setIsX]=useState(true)
   const [cptShoot, setCptShoot] = useState(2)
+  const [isBot, setIsBot] = useState(false)
 
   // Constante des scores
     const scoreX = useScore((state) => state.scoreX)
@@ -87,6 +88,39 @@ function App() {
     return subCase
   }
   
+  function calcFreeCase(){
+    //Fonction qui met dans un tableau l'ensemble des cases vides du board
+    let tab = [...board]
+    let tabFreeCase=[]
+    for(let i = 0 ;i<tab.length; i++){
+      for(let j =0; j<tab.length;j++){
+        if(!tab[i][j])
+          tabFreeCase.push([i,j])
+      }
+    }
+    let shot = tabFreeCase[Math.floor(Math.random() * tabFreeCase.length)]
+    const newBoard=[...board]
+    newBoard[shot[0]][shot[1]]=colorsTab[Math.floor(Math.random() * colorsTab.length)]
+    setBoard(newBoard)
+    changeColor()
+    return checkCombination(shot[0],shot[1])
+  }
+
+  async function botTurn(){
+    // Fonction qui établi le tour de l'ordinateur
+    let i =0
+    setCptShoot(2)
+    while(i<2){
+      let trueFalse=false
+      trueFalse = calcFreeCase()
+      if (trueFalse) {
+        i++
+      }
+    }
+    setIsX(true)
+    setCptShoot(2)
+  }
+
   function handleClick(e,i,j){
     if (cptShoot != 0) {  // On verifie qui joue en fonction du compteur de tour, chaque joueur a droit à 2 tir par tour
       const newBoard=[...board]
@@ -102,6 +136,8 @@ function App() {
   if (cptShoot === 0 ) {
     setIsX(!isX)
     setCptShoot(2)
+    if(isX && isBot){
+      botTurn()}
   }
   function reset() {
     setBoard(Array(5).fill().map(row => new Array(5).fill("")))
@@ -114,20 +150,25 @@ function App() {
     setIsX(!isX)
     setCptShoot(2)
   }
+
+  function playerBot(){
+    setIsBot(!isBot)
+  }
   return (
     <>
       <h1>Chain Reaction</h1>
 
-      <p>Score Joueur 1 : {scoreX}<br/>Score Joueur 2 : {scoreY}</p>
+      <p>Score Joueur 1 : {scoreX}<br/>Score {isBot?"Ordinateur":"Joueur 2"} : {scoreY}</p>
       <button onClick={()=>reset()}>Reset</button>
+      <button onClick={()=>playerBot()}>{isBot?"Contre un joueur":"Contre un bot"}</button>
       <div className="board">
         {board.map((cell,i)=>(cell.map((cell2,j)=>
           <button disabled={board[i][j] ? true : false} name="pad" key={j} className={`cell ${board[i][j]}`} onClick={(e)=>handleClick(e,i,j)}>
           
           </button>
         )))}
-        <p>{isX ? <span>Joueur 1</span> : <span>Joueur 2</span>} joue la couleur : {color}</p>
       </div>
+        <p>{isX ? <span>Joueur 1</span> : <span>{isBot?"Ordinateur":"Joueur 2"}</span>} tire la couleur : {color}</p>
         <button onClick={()=> passTurn()}>Passer le tour</button>
     </>
   )
