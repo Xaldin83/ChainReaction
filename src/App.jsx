@@ -103,12 +103,23 @@ function App() {
     setIsX(!isX)
     setCptShoot(2)
   }
-
+  function reset() {
+    setBoard(Array(5).fill().map(row => new Array(5).fill("")))
+    resetX()
+    resetY()
+    setCptShoot(2)
+    setIsX(true)
+  }
+  function passTurn() {
+    setIsX(!isX)
+    setCptShoot(2)
+  }
   return (
     <>
       <h1>Chain Reaction</h1>
 
       <p>Score Joueur 1 : {scoreX}<br/>Score Joueur 2 : {scoreY}</p>
+      <button onClick={()=>reset()}>Reset</button>
       <div className="board">
         {board.map((cell,i)=>(cell.map((cell2,j)=>
           <button disabled={board[i][j] ? true : false} name="pad" key={j} className={`cell ${board[i][j]}`} onClick={(e)=>handleClick(e,i,j)}>
@@ -117,6 +128,7 @@ function App() {
         )))}
         <p>{isX ? <span>Joueur 1</span> : <span>Joueur 2</span>} joue la couleur : {color}</p>
       </div>
+        <button onClick={()=> passTurn()}>Passer le tour</button>
     </>
   )
 }
