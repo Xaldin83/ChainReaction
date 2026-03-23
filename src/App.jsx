@@ -65,15 +65,16 @@ function App() {
     if(cpt!=0){
       subCase = false
       for(let x =0;x<cpt-2;x++){
-        if(isX)
+        if(isX){
           increaseScoreX()
-          
+          console.log(subCase)}
         else
           increaseScoreY()}
       let k = j-1
       while(k>=0 && board[i][k]===board[i][j]){
         console.log(i,k)
         board[i][k]= null
+        
         k--}
       k = j+1
       while(k<5 && board[i][k]===board[i][j]){
@@ -84,9 +85,9 @@ function App() {
 
     if (!subCase) {
       board[i][j] = null
-      setCptShoot(cptShoot + 1)
-      console.log("couille", cptShoot)
+      // setCptShoot(cptShoot + 1)
     }
+    return subCase
   }
   
   function handleClick(e,i,j){
@@ -95,15 +96,15 @@ function App() {
       newBoard[i][j]=color
       setBoard(newBoard)
       changeColor()
-      checkCombination(i,j)
-      setCptShoot(cptShoot-1)
-      console.log("bapt", cptShoot)
+      let trueFalse = checkCombination(i,j)
+      if (trueFalse) {
+        setCptShoot(cptShoot-1)
+      }
     } 
   }
   if (cptShoot === 0 ) {
     setIsX(!isX)
     setCptShoot(2)
-    console.log("cosmique", cptShoot)
   }
 
   return (
