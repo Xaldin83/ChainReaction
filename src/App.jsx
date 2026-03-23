@@ -36,10 +36,10 @@ function App() {
     if(cpt<3)
       cpt=0
     if(cpt!=0){
+      subCase = false
       for(let x =0;x<cpt-2;x++){
-        if(isX){
+        if(isX)
           increaseScoreX()
-          subCase = false}
         else
           increaseScoreY()}
       let k = i-1
@@ -65,20 +65,17 @@ function App() {
     if(cpt!=0){
       subCase = false
       for(let x =0;x<cpt-2;x++){
-        if(isX){
+        if(isX)
           increaseScoreX()
-          console.log(subCase)}
         else
           increaseScoreY()}
       let k = j-1
       while(k>=0 && board[i][k]===board[i][j]){
-        console.log(i,k)
         board[i][k]= null
         
         k--}
       k = j+1
       while(k<5 && board[i][k]===board[i][j]){
-        console.log(i,k)
         board[i][k]= null
         k++}
     }
