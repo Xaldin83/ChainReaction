@@ -27,20 +27,33 @@ function App() {
     // Fonction qui vérifie les différentes combinaisons afin de vérifier s'il y a un une combinaison
     let cpt = 0
     let subCase = true
-    for(let val = 0;val<board.length;val++){ //Vérification ligne
+    for(let val = 0;val<board.length;val++){ //Vérification colonne
       if(board[val][j]===board[i][j])
         cpt++
       else
         if(cpt<3)
           cpt=0}
+    if(cpt<3)
+      cpt=0
     if(cpt!=0){
-      for(let k =0;k<cpt-2;k++){
+      for(let x =0;x<cpt-2;x++){
         if(isX){
           increaseScoreX()
           subCase = false}
         else
           increaseScoreY()}
+      let k = i-1
+      while(k>=0 && board[k][j]===board[i][j]){
+        console.log(k,j)
+        board[k][j]= null
+        k--}
+      k = i+1
+      while(k<5 && board[k][j]===board[i][j]){
+        console.log(k,j)
+        board[k][j]= null
+        k++}
     }
+
 
     cpt=0
     for(let val = 0;val<board.length;val++){ //Vérification ligne
@@ -49,17 +62,29 @@ function App() {
       else
         if(cpt<3)
           cpt=0}
+    if(cpt<3)
+      cpt=0
     if(cpt!=0){
       subCase = false
-      for(let k =0;k<cpt-2;k++){
+      for(let x =0;x<cpt-2;x++){
         if(isX)
           increaseScoreX()
         else
           increaseScoreY()}
+      let k = j-1
+      while(k>=0 && board[i][k]===board[i][j]){
+        console.log(i,k)
+        board[i][k]= null
+        k--}
+      k = j+1
+      while(k<5 && board[i][k]===board[i][j]){
+        console.log(i,k)
+        board[i][k]= null
+        k++}
     }
 
     if (!subCase) {
-      board[i][j] = " "
+      board[i][j] = null
     }
   }
   
