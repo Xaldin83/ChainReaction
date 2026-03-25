@@ -83,7 +83,6 @@ function App() {
 
     if (!subCase) {
       board[i][j] = null
-      // setCptShoot(cptShoot + 1)
     }
     return subCase
   }
@@ -155,6 +154,7 @@ function App() {
 
   function playerBot(){
     setIsBot(!isBot)
+    reset()
   }
 
   function shakeBoard(){   // fonction pour reset le board si toute les case sont prises et que aucun bloc de 3 est disponible
