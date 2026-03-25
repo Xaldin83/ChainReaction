@@ -140,7 +140,7 @@ function App() {
       botTurn()}
   }
   function reset() {
-    setBoard(() => Array(5).fill().map(row => new Array(5).fill("")))
+    setBoard(() => Array(5).fill().map(() => new Array(5).fill("")))
     resetX()
     resetY()
     setCptShoot(2)
@@ -154,6 +154,21 @@ function App() {
   function playerBot(){
     setIsBot(!isBot)
   }
+
+  function shakeBoard(){   // fonction pour reset le board si toute les case sont prises et que aucun bloc de 3 est disponible
+    let isComplet = true
+    for(let i = 0;i<board.length; i++){
+      for (let j = 0; j < board.length; j++) {
+            if (board[i][j] === "") {
+              isComplet = false
+            }        
+      }
+    }
+    if (isComplet) {
+      setBoard(() => Array(5).fill().map(() => new Array(5).fill("")))
+    }
+  }
+
   return (
     <>
       <h1>Chain Reaction</h1>
