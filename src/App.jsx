@@ -116,6 +116,7 @@ function App() {
       if (trueFalse) {
         i++
       }
+      shakeBoard()
     }
     setIsX(true)
     setCptShoot(2)
@@ -132,6 +133,7 @@ function App() {
         setCptShoot(cptShoot => cptShoot-1)
       }
     } 
+    shakeBoard()
   }
   if (cptShoot === 0 ) {
     setIsX(!isX)
