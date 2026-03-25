@@ -132,6 +132,7 @@ function App() {
         setCptShoot(cptShoot => cptShoot-1)
       }
     } 
+    shakeBoard()
   }
   if (cptShoot === 0 ) {
     setIsX(!isX)
@@ -157,15 +158,23 @@ function App() {
 
   function shakeBoard(){   // fonction pour reset le board si toute les case sont prises et que aucun bloc de 3 est disponible
     let isComplet = true
+    console.log("couille")
     for(let i = 0;i<board.length; i++){
+      console.log("1");
+      
       for (let j = 0; j < board.length; j++) {
+        console.log("2");
+        
             if (board[i][j] === "") {
               isComplet = false
+              console.log("3");
+              
             }        
       }
     }
     if (isComplet) {
       setBoard(() => Array(5).fill().map(() => new Array(5).fill("")))
+      console.log("46")
     }
   }
 
